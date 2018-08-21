@@ -1,4 +1,8 @@
-# Auto Detect Indention Plugin for [Notepad++](https://notepad-plus-plus.org/) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/Chocobo1/nppAutoDetectIndent?branch=master&svg=true)](https://ci.appveyor.com/project/Chocobo1/nppAutoDetectIndent)
+# Auto Detect Indention Plugin for [Notepad++](https://notepad-plus-plus.org/)
+
+[![version][version-img]][version-url]
+[![mit license][license-img]][license-url]
+[![build status][appveyor-img]][appveyor-url]
 
 Detects indention (tab or spaces) and auto adjust <kbd>Tab</kbd> key on-the-fly
 
@@ -17,17 +21,24 @@ Detects indention (tab or spaces) and auto adjust <kbd>Tab</kbd> key on-the-fly
    For Notepad++ x64: `C:\Program Files\Notepad++\plugins`
 
 ## Download
-[Releases page](../../releases) (x86 & x64 included)
 
-## Why
-Many projects have differnet coding style requirements, some use tabs other prefer spaces.<br>
-And there is this holy war of [tabs or spaces](http://wiki.c2.com/?TabsVersusSpaces).
-
-I first discovered this function in [Geany editor](https://www.geany.org/): [detecting-indent-type](https://geany.org/manual/dev/#detecting-indent-type)<br>
-I thought it's cool because you don't have to worry about having the correct settings in your editor nor care about [editorconfig](http://editorconfig.org/), it just works!
+[Latest version](./archive/1.0.zip) (x86 & x64 included)
 
 ## Compiler
 Visual Studio 2017 Community
 
-## License
-See [LICENSE](./LICENSE) file
+## Origin
+
+Chocobo1 first discovered this functionality in [Geany editor](https://www.geany.org/): [detecting-indent-type](https://geany.org/manual/dev/#detecting-indent-type)<br>
+Finding autodetection preferable to reliance on systems like [editorconfig](http://editorconfig.org/), he implemented the [original version](https://github.com/Chocobo1/nppAutoDetectIndent).
+
+After using the plugin for some time, I became increasingly annoyed with the plugin failing to correctly identify the width of space-based indentation.  I was able to note some ways that the accuracy could be enhanced, however Chocobo1 was not actively supporting his version (or at least interested in my contributions).  Hence this fork.
+
+[version-url]: https://github.com/evan-king/nppAutoDetectIndent/releases
+[version-img]: https://img.shields.io/github/release/evan-king/nppAutoDetectIndent.svg?style=flat
+
+[appveyor-url]: https://ci.appveyor.com/project/evan-king/nppAutoDetectIndent
+[appveyor-img]: https://ci.appveyor.com/api/projects/status/github/evan-king/nppAutoDetectIndent?branch=master&svg=true
+
+[license-url]: https://github.com/evan-king/nppAutoDetectIndent/blob/master/LICENSE
+[license-img]: https://img.shields.io/aur/license/yaourt.svg?style=flat

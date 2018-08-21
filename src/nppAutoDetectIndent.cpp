@@ -235,5 +235,5 @@ void MenuAction::doNothing()
 
 void MenuAction::gotoWebsite()
 {
-	ShellExecute(NULL, TEXT("open"), TEXT("https://github.com/Chocobo1/nppAutoDetectIndent"), NULL, NULL, SW_SHOWDEFAULT);
+	ShellExecute(NULL, TEXT("open"), TEXT("https://github.com/evan-king/nppAutoDetectIndent"), NULL, NULL, SW_SHOWDEFAULT);
 }
