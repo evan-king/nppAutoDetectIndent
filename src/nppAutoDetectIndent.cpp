@@ -12,6 +12,13 @@
 #define PLUGIN_VERSION "1.0"
 
 static const int MAX_LINES = 5000;
+
+static const int MIN_INDENT = 2; // minimum width of a single indentation
+static const int MAX_INDENT = 8; // maximum width of a single indentation
+
+static const int MIN_DEPTH = MIN_INDENT; // ignore lines below this indentation level
+static const int MAX_DEPTH = 3*MAX_INDENT; // ignore lines beyond this indentation level
+
 extern MyPlugin plugin;
 
 
@@ -75,43 +82,42 @@ int nppAutoDetectIndent::detectIndentSpaces()
 
 	const auto sciCall = plugin.getScintillaDirectCall();
 
-	int spaces[10] = {0};  // [2, 12]
+	const int line_count = (std::min)(int(sciCall(SCI_GETLINECOUNT)), MAX_LINES);
+	const float grace = float(line_count) / 50.0;
 
-	const int Lines = (std::max)(int(sciCall(SCI_GETLINECOUNT)), MAX_LINES);
-	for (int i = 0; i < Lines; ++i)
-	{
+	int frequency[MAX_DEPTH+1] = {0}; // indentation => count(lines of that exact indentation)
+	int margin[MAX_INDENT+1] = {0}; // indentation => count(lines with incompatible indentation)
+
+	// track frequency of lines fitting each exact indentation level between DEPTH limits
+	for(int i = 0; i < line_count; ++i) {
 		const int indentWidth = int(sciCall(SCI_GETLINEINDENTATION, i));
-		if (indentWidth < 2)
-			continue;
+		if(indentWidth < MIN_DEPTH || indentWidth > MAX_DEPTH) continue;
 
 		const int linePos = int(sciCall(SCI_POSITIONFROMLINE, i));
 		const char lineHeadChar = char(sciCall(SCI_GETCHARAT, linePos));
+		if(lineHeadChar == '\t') continue;
+		
+		frequency[indentWidth]++;
+	}
 
-		if (lineHeadChar == '\t')
-			continue;
-
-		// TODO: get length of continuous spaces
-		// but now lets just be lazy...
-
-		for (int k = 0; k < ARRAY_LENGTH(spaces); ++k)
-		{
-			if (indentWidth % (k + 2) == 0)
-				++spaces[k];
+	// every counted line incompatible with this indentation level increases margin by one
+	for(int i = MIN_DEPTH; i <= MAX_DEPTH; i++) {
+		for(int k = MIN_INDENT; k <= MAX_INDENT; k++) {
+			if(i % k == 0) continue;
+			margin[k] += frequency[i];
 		}
 	}
 
-	int which = 0;
-	int weight = 0;
-	for (int i = (ARRAY_LENGTH(spaces) - 1); i >= 0; --i)  // give larger indents higher chance
-	{
-		if (spaces[i] > (weight * 3 / 2))
-		{
-			weight = spaces[i];
-			which = i;
-		}
+	// choose the last indent with the smallest margin (ties go to larger indent)
+	// Considers margins within grace of zero as =zero,
+	// so occasional typos don't force smaller indentation
+	int which = MIN_INDENT;
+	for(int i = MIN_INDENT; i <= MAX_INDENT; ++i) {
+		if(frequency[i] == 0) continue;
+		if(margin[i] <= margin[which] || margin[i] < grace) which = i;
 	}
 
-	return (which + 2);
+	return which;
 }
 
 nppAutoDetectIndent::IndentType nppAutoDetectIndent::detectIndentType()
