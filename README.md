@@ -22,7 +22,7 @@ Detects indention (tab or spaces) and auto adjust <kbd>Tab</kbd> key on-the-fly
 
 ## Download
 
-[Latest version](./archive/1.0.zip) (x86 & x64 included)
+[Latest version](./archive/1.0.1.zip) (x86 & x64 included)
 
 ## Compiler
 Visual Studio 2017 Community
@@ -32,7 +32,7 @@ Visual Studio 2017 Community
 Chocobo1 first discovered this functionality in [Geany editor](https://www.geany.org/): [detecting-indent-type](https://geany.org/manual/dev/#detecting-indent-type)<br>
 Finding autodetection preferable to reliance on systems like [editorconfig](http://editorconfig.org/), he implemented the [original version](https://github.com/Chocobo1/nppAutoDetectIndent).
 
-After using the plugin for some time, I became increasingly annoyed with the plugin failing to correctly identify the width of space-based indentation.  I was able to note some ways that the accuracy could be enhanced, however Chocobo1 was not actively supporting his version (or at least interested in my contributions).  Hence this fork.
+After using the plugin for some time, I became increasingly annoyed with the plugin failing to correctly identify the indentation width for files using spaces.  I was able to note some ways that the accuracy could be enhanced, however Chocobo1 was not actively supporting his version (or at least uninterested in my contributions).  Hence this fork.
 
 [version-url]: https://github.com/evan-king/nppAutoDetectIndent/releases
 [version-img]: https://img.shields.io/github/release/evan-king/nppAutoDetectIndent.svg?style=flat

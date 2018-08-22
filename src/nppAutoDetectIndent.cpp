@@ -9,7 +9,8 @@
 #include <Strsafe.h>
 
 
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_VERSION "1.0.1"
+#define PLUGIN_HOMEPAGE "https://github.com/evan-king/nppAutoDetectIndent"
 
 static const int MAX_LINES = 5000;
 
@@ -18,6 +19,9 @@ static const int MAX_INDENT = 8; // maximum width of a single indentation
 
 static const int MIN_DEPTH = MIN_INDENT; // ignore lines below this indentation level
 static const int MAX_DEPTH = 3*MAX_INDENT; // ignore lines beyond this indentation level
+
+static const char TAB = '\t';
+static const char SPACE = ' ';
 
 extern MyPlugin plugin;
 
@@ -95,7 +99,7 @@ int nppAutoDetectIndent::detectIndentSpaces()
 
 		const int linePos = int(sciCall(SCI_POSITIONFROMLINE, i));
 		const char lineHeadChar = char(sciCall(SCI_GETCHARAT, linePos));
-		if(lineHeadChar == '\t') continue;
+		if(lineHeadChar == TAB) continue;
 		
 		frequency[indentWidth]++;
 	}
@@ -241,5 +245,5 @@ void MenuAction::doNothing()
 
 void MenuAction::gotoWebsite()
 {
-	ShellExecute(NULL, TEXT("open"), TEXT("https://github.com/evan-king/nppAutoDetectIndent"), NULL, NULL, SW_SHOWDEFAULT);
+	ShellExecute(NULL, TEXT("open"), TEXT(PLUGIN_HOMEPAGE), NULL, NULL, SW_SHOWDEFAULT);
 }
