@@ -22,7 +22,7 @@ Detects indention (tab or spaces) and auto adjust <kbd>Tab</kbd> key on-the-fly
 
 ## Download
 
-[Latest version](./archive/1.0.1.zip) (x86 & x64 included)
+[Latest version](https://github.com/evan-king/nppAutoDetectIndent/releases/download/1.0.1/nppAutoDetectIndent-1.0.1.zip) (x86 & x64 included)
 
 ## Compiler
 Visual Studio 2017 Community
