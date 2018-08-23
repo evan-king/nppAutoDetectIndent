@@ -1,4 +1,7 @@
-# Auto Detect Indention Plugin for [Notepad++](https://notepad-plus-plus.org/)
+
+# DEPRECATED: see [Indenture](https://github.com/evan-king/nppIndenture) instead
+
+## Auto Detect Indention Plugin for [Notepad++](https://notepad-plus-plus.org/)
 
 [![version][version-img]][version-url]
 [![mit license][license-img]][license-url]
